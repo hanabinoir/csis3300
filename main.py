@@ -1,7 +1,7 @@
 import json
 import random
 
-with open("records_with_overall_record.json") as collection:
+with open("csis3300_test.json") as collection:
     documents = json.load(collection)
     for document in documents:
         # Randomly drop attributes
