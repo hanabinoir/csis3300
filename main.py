@@ -2,12 +2,6 @@ import json
 import random
 
 
-def get_document():
-    collection = open("csis3300_test.json", 'w')
-    documents = json.load(collection)
-    return documents
-
-
 def random_drop_attribute(documents):
     for document in documents:
         # Randomly drop attributes
@@ -26,7 +20,7 @@ def random_drop_attribute(documents):
                 print("Player " + str(i + 1) + " birthday dropped")
 
 
-def random_winner(documents):
+def winning_settings(documents):
     for document in documents:
         winner_index = random.randint(0, 1)
         if len(document['player']) > 1:
@@ -36,6 +30,10 @@ def random_winner(documents):
                 document['winner'] = document['player'][winner_index]['id']
             else:
                 document['winner'] = "AI"
+        for i in range(0, len(document['player'])):
+            winning_rate = random.uniform(0.1, 0.99)
+            winning_rate = round(winning_rate, 4)
+            document['player'][i]['winning_rate'] = winning_rate
 
 
 def player_2_data(documents):
@@ -59,9 +57,7 @@ def print_collection(documents):
         print(document)
 
 if __name__ == '__main__':
-    # records = get_document()
     with open('csis3300_test.json') as collection:
         records = json.load(collection)
-        random_drop_attribute(records)
-        random_winner(records)
+        winning_settings(records)
         print_collection(records)
